@@ -45,7 +45,7 @@ public class Hangman {
     " +---+\n" +
     " |   |\n" +
     " O   |\n" +
-    "/|\\  |\n" + //if you were wondering, the only way to print '\' is with a trailing escape character, which also happens to be '\'
+    "/|\\  |\n" + 
     "     |\n" +
     "     |\n" +
     " =========\n",
@@ -65,6 +65,52 @@ public class Hangman {
     "/ \\  |\n" +
     "     |\n" +
     " =========\n"};
+
+    public static String randomWord() {
+        String word = "";
+        int randomNumber = (int)(Math.random() * words.length);
+        for (int i = 0; i < words.length; i++) {
+            word = words[randomNumber];
+        }
+        return word;
+    }
+
+    public static void printPlaceholders(char[] placeholders) {
+        for (int i = 0; i < placeholders.length; i++) {
+            System.out.print(placeholders[i] + " ");
+        }
+        System.out.print("\n");
+    }
+
+    public static boolean checkGuess(char[] word, String playerGuess) {
+        for (int i = 0; i < word.length; i++) {
+            if (playerGuess.equals(String.valueOf(word[i]))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static void printMissedGuesses(char[] word, String playerGuess) {
+            String missed = "";
+            for (int i = 0; i < word.length; i++) {
+                missed = "";
+                if (!checkGuess(word, playerGuess)) {
+                    missed += playerGuess;  
+            }
+            }
+            System.out.print("Misses: " + missed);
+            System.out.println();
+    }
+
+    
+    public static void updatePlaceholders(char[] randomWord, char[] placeholders, char guess) {
+        for (int i = 0; i < randomWord.length; i++) {
+            if (randomWord[i] == guess) {
+                placeholders[i] = guess;
+            }
+        }
+    }
 
     public static void main(String[] args) {
 
